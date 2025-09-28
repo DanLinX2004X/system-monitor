@@ -5,7 +5,7 @@
 # Version: 1.0
 # Author: DanLin (DanLinX2004X)
 # Github author: https://github.com/DanLinX2004X
-# Description: Description: Bash script for monitoring system metrics (CPU, memory, disk, network)
+# Description: Bash script for monitoring system metrics (CPU, memory, disk, network)
 # =============================================================================
 
 SCRIPT_NAME="system-monitor.sh"
