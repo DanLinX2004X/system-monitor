@@ -128,13 +128,13 @@ cd system-monitor
 
 ### Screeens
 
-![](dosc/system-monitor-default.png)
+![](docs/system-monitor-default.png)
 
-![](dosc/system-monitor-help.png)
+![](docs/system-monitor-help.png)
 
 ![](docs/system-monitor-brief.png)
 
-![](dosc/demonstation.gif)
+![](docs/demonstation.gif)
 
 
 ### Краткий режим
