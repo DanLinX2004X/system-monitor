@@ -36,6 +36,7 @@ chmod +x system-monitor.sh
 
 
 ## --help
+```bash
 system-monitor.sh - System Monitoring Tool (CPU, Memory, Disk, Network)
 
 Usage: ./system-monitor.sh [OPTIONS]
@@ -57,6 +58,7 @@ EXIT CODES:
   0 - Success
   1 - Invalid arguments
   2 - Missing dependencies
+```
 
 
 ## 📋 Usage Examples
