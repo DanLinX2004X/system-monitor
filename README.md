@@ -90,13 +90,13 @@ EXIT CODES:
 ## ⚙️ Installation
 ### Direct Download
 ```bash
-wget https://raw.githubusercontent.com/yourusername/system-monitor/main/system-monitor.sh
+wget https://raw.githubusercontent.com/DanLinX2004X/system-monitor/main/system-monitor.sh
 chmod +x system-monitor.sh
 ```
 
 ### Clone Repository
 ```bash
-git clone https://github.com/yourusername/system-monitor.git
+git clone https://github.com/DanLinX2004X/system-monitor.git
 cd system-monitor
 ./system-monitor.sh -i 3
 ```
