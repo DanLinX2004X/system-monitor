@@ -3,6 +3,7 @@
 [![Лицензия: GPL v3](https://img.shields.io/badge/Лицензия-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Shell Script](https://img.shields.io/badge/Shell-Bash-4EAA25.svg)](https://www.gnu.org/software/bash/)
 [![Платформа](https://img.shields.io/badge/Платформа-Linux-lightgrey.svg)](https://www.linux.org/)
+[![AUR](https://img.shields.io/aur/version/system-monitor?color=1793d1&label=AUR)](https://aur.archlinux.org/packages/system-monitor)
 
 Мощный Bash-скрипт для мониторинга системы в реальном времени. Отображает метрики CPU, памяти, диска и сети с цветовыми предупреждениями.
 
@@ -88,12 +89,20 @@ system-monitor.sh — инструмент мониторинга системы
 ```
 
 ## ⚙️ Установка
+### Доступно в AUR (Arch User Repository):
 
-### Прямая загрузка
+```bash
+yay -S system-monitor
+# или
+paru -S system-monitor
+```
+
+### Прямая загрузка (Все дистрибутивы)
 
 ```bash
 wget https://raw.githubusercontent.com/DanLinX2004X/system-monitor/main/system-monitor.sh
 chmod +x system-monitor.sh
+sudo mv system-monitor.sh /usr/local/bin/system-monitor
 ```
 
 ### Клонирование репозитория
