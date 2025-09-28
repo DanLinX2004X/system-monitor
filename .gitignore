@@ -1,0 +1,12 @@
+*.log
+*.out
+*.tmp
+
+*.bak
+*.backup
+
+.DS_Store
+Thumbs.db
+
+.vscode/
+.idea/
