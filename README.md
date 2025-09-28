@@ -3,6 +3,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Shell Script](https://img.shields.io/badge/Shell-Bash-4EAA25.svg)](https://www.gnu.org/software/bash/)
 [![Platform](https://img.shields.io/badge/Platform-Linux-lightgrey.svg)](https://www.linux.org/)
+[![AUR](https://img.shields.io/aur/version/system-monitor)](https://aur.archlinux.org/packages/system-monitor)
 
 A powerful Bash script for real-time system monitoring. Displays CPU, memory, disk, and network metrics with colored output and threshold alerts.
 
@@ -88,10 +89,18 @@ EXIT CODES:
 ./system-monitor.sh -i 10 | tee system_log.txt
 ```
 ## ⚙️ Installation
-### Direct Download
+### Available in the AUR (Arch User Repository):
+```bash
+yay -S system-monitor
+# or
+paru -S system-monitor
+```
+
+### Direct Download (All Distributions)
 ```bash
 wget https://raw.githubusercontent.com/DanLinX2004X/system-monitor/main/system-monitor.sh
 chmod +x system-monitor.sh
+sudo mv system-monitor.sh /usr/local/bin/system-monitor
 ```
 
 ### Clone Repository
