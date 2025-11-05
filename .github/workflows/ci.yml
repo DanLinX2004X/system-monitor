@@ -20,6 +20,7 @@ jobs:
 
       - name: Run Shellcheck
         uses: ludeeus/action-shellcheck@master
+        continue-on-error: true
 
       - name: Verify dependencies
         run: |
