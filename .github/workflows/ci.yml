@@ -1,0 +1,41 @@
+name: Bash CI
+
+on:
+  push:
+    branches: [main, feature/ci-pipeline]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  bash-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Syntax check
+        run: bash -n system-monitor.sh
+
+      - name: Run Shellcheck
+        uses: ludeeus/action-shellcheck@v2
+
+      - name: Verify dependencies
+        run: |
+          for cmd in awk grep free df ps bc ip; do
+            if ! command -v $cmd &>/dev/null; then
+              echo "Missing dependency: $cmd"
+              exit 1
+            fi
+          done
+
+      - name: Help/version flags test
+        run: |
+          chmod +x system-monitor.sh
+          ./system-monitor.sh --help | grep "Usage"
+          ./system-monitor.sh --version | grep "version"
+
+      - name: Smoke test
+        run: |
+          ./system-monitor.sh --brief | grep "cpu_load"
