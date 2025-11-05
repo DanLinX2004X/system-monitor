@@ -19,7 +19,7 @@ jobs:
         run: bash -n system-monitor.sh
 
       - name: Run Shellcheck
-        uses: ludeeus/action-shellcheck@v2
+        uses: ludeeus/action-shellcheck@master
 
       - name: Verify dependencies
         run: |
