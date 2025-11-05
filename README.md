@@ -227,7 +227,7 @@ Add a line for hourly monitoring (runs at the beginning of each hour):**
     
 - Cron runs with a minimal environment - test thoroughly
 
-### 🐳 **Docker Container Monitoring**
+### 🐳 Docker Container Monitoring
 
 You can use this script to monitor resources inside Docker containers.
 
@@ -283,7 +283,7 @@ docker exec postgres-container /tmp/system-monitor.sh --brief
 - Some **system metrics** may not be available in containers
     
 
-### 🔄 **Alternative: Run from host system**
+### 🔄 *lternative: Run from host system
 
 You can also monitor containers from the host system:
 
@@ -297,18 +297,33 @@ docker exec container_name cat /proc/loadavg
 docker exec container_name free -h
 ```
 
+## ⚙️ CI Integration & ShellCheck Fixes
+
+- Continuous Integration (CI): Added GitHub Actions workflow to automatically check the script on every push and pull request.
+	- Syntax check (bash -n)
+	- ShellCheck validation
+	- Dependency verification (awk, grep, free, df, ps, bc, ip)
+	- Smoke tests & basic flag tests (--help, --version, --brief)
+- ShellCheck Warnings: Fixed all warnings in system-monitor.sh to ensure clean, maintainable code.
+	- Quotes around variables
+	- Separate declaration and assignment for local variables
+	- Word splitting issues resolved
+
+> ✅ CI ensures that every future change maintains script correctness and readability.
+
+
 ## 🤝 Contributing
 
 If you'd like to suggest improvements or report issues:
 
-### 📝 **Easiest Way (Recommended):**
+### 📝 Easiest Way (Recommended):
 
 1. **Create an Issue** on GitHub - describe your idea or problem
     
 2. **I'll implement the changes** myself and credit you in the commits
     
 
-### 💻 **For Advanced Users (if familiar with Git):**
+### 💻 For Advanced Users (if familiar with Git):
 
 1. **Fork the repository** (click "Fork" in the top-right corner)
     
@@ -317,7 +332,7 @@ If you'd like to suggest improvements or report issues:
 3. **Create a Pull Request** - I'll review and merge your changes
     
 
-### 🐛 **Reporting Bugs:**
+### 🐛 Reporting Bugs:
 
 In your Issue, please include:
 
@@ -330,7 +345,7 @@ In your Issue, please include:
 - What you expected to see
     
 
-### 💡 **Improvement Ideas:**
+### 💡 Improvement Ideas:
 
 - Add CPU temperature monitoring
     

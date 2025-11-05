@@ -135,7 +135,8 @@ colorize() {
 
 # --- CPU Metrics Collection ---
 get_cpu_metrics() {
-    local loadavg=$(cat /proc/loadavg 2>/dev/null)
+    local loadavg
+    loadavg=$(cat /proc/loadavg 2>/dev/null)
     if [ -n "$loadavg" ]; then
         CPU_LOAD_1MIN=$(echo "$loadavg" | awk '{print $1}')
         CPU_LOAD_5MIN=$(echo "$loadavg" | awk '{print $2}')
@@ -143,7 +144,8 @@ get_cpu_metrics() {
         CPU_CORES=$(nproc 2>/dev/null || echo "1")
 
         # Calculate load as percentage of CPU cores
-        local load_percent=$(echo "scale=0; ($CPU_LOAD_1MIN * 100) / $CPU_CORES" | bc 2>/dev/null)
+        local load_percent
+        load_percent=$(echo "scale=0; ($CPU_LOAD_1MIN * 100) / $CPU_CORES" | bc 2>/dev/null)
         CPU_LOAD_PERCENT=${load_percent:-0}
     else
         CPU_LOAD_1MIN="N/A"
@@ -156,7 +158,8 @@ get_cpu_metrics() {
 
 # --- Memory Metrics Collection ---
 get_memory_metrics() {
-    local mem_info=$(free -b 2>/dev/null | grep Mem)
+    local mem_info
+    mem_info=$(free -b 2>/dev/null | grep Mem)
     if [ -n "$mem_info" ]; then
         MEM_TOTAL=$(echo "$mem_info" | awk '{printf "%.2f", $2/1024/1024/1024}')
         MEM_USED=$(echo "$mem_info" | awk '{printf "%.2f", $3/1024/1024/1024}')
@@ -172,7 +175,8 @@ get_memory_metrics() {
 
 # --- Disk Metrics Collection ---
 get_disk_metrics() {
-    local disk_info=$(df -B1 / 2>/dev/null | awk 'NR==2')
+    local disk_info
+    disk_info=$(df -B1 / 2>/dev/null | awk 'NR==2')
     if [ -n "$disk_info" ]; then
         DISK_USED=$(echo "$disk_info" | awk '{printf "%.1f", $3/1024/1024/1024}')
         DISK_AVAILABLE=$(echo "$disk_info" | awk '{printf "%.1f", $4/1024/1024/1024}')
@@ -191,11 +195,14 @@ get_disk_metrics() {
 # --- Network Metrics Collection ---
 get_network_metrics() {
     # Get primary network interface (route to Google DNS)
-    local interface=$(ip route get 8.8.8.8 2>/dev/null | awk '{print $5}' | head -1)
+    local interface
+    interface=$(ip route get 8.8.8.8 2>/dev/null | awk '{print $5}' | head -1)
     if [ -n "$interface" ] && [ "$interface" != "dev" ]; then
         NET_INTERFACE="$interface"
-        local rx_bytes=$(cat "/sys/class/net/$interface/statistics/rx_bytes" 2>/dev/null)
-        local tx_bytes=$(cat "/sys/class/net/$interface/statistics/tx_bytes" 2>/dev/null)
+        local rx_bytes
+        rx_bytes=$(cat "/sys/class/net/$interface/statistics/rx_bytes" 2>/dev/null)
+        local tx_bytes
+        tx_bytes=$(cat "/sys/class/net/$interface/statistics/tx_bytes" 2>/dev/null)
 
         NET_RX_MB=$(echo "scale=2; ${rx_bytes:-0} / 1024 / 1024" | bc 2>/dev/null)
         NET_TX_MB=$(echo "scale=2; ${tx_bytes:-0} / 1024 / 1024" | bc 2>/dev/null)
@@ -259,14 +266,14 @@ print_detailed_stats() {
     # CPU Information
     echo -e "${BLUE}==== CPU LOAD ====${NC}"
     echo -e "CPU Cores: $CPU_CORES"
-    echo -e "Load Average: 1min: $(colorize $CPU_LOAD_1MIN 1 2) | 5min: $(colorize $CPU_LOAD_5MIN 1 2) | 15min: $(colorize $CPU_LOAD_15MIN 1 2)"
-    echo -e "System Load: $(colorize ${CPU_LOAD_PERCENT}% 70 90)"
+    echo -e "Load Average: 1min: $(colorize "$CPU_LOAD_1MIN" 1 2) | 5min: $(colorize "$CPU_LOAD_5MIN" 1 2) | 15min: $(colorize "$CPU_LOAD_15MIN" 1 2)"
+    echo -e "System Load: $(colorize "${CPU_LOAD_PERCENT}"% 70 90)"
     echo
 
     # Memory Information
     echo -e "${BLUE}==== MEMORY USAGE ====${NC}"
     echo -e "Total: ${MEM_TOTAL} GB"
-    echo -e "Used: $(colorize "${MEM_USED} GB" $(echo "scale=0; $MEM_TOTAL * 0.7" | bc 2>/dev/null) $(echo "scale=0; $MEM_TOTAL * 0.9" | bc 2>/dev/null))"
+    echo -e "Used: $(colorize "${MEM_USED} GB" "$(echo "scale=0; $MEM_TOTAL * 0.7" | bc 2>/dev/null)" "$(echo "scale=0; $MEM_TOTAL * 0.9" | bc 2>/dev/null)")"
     echo -e "Available: ${MEM_AVAILABLE} GB"
     echo -e "Usage: $(colorize "${MEM_PERCENT}%" 70 90)"
     echo
@@ -341,7 +348,7 @@ main() {
             echo
 
             # Sleep with interrupt checking
-            for ((i=0; i<INTERVAL && EXIT_SIGNAL==false; i++)); do
+            while [ "$EXIT_SIGNAL" = false ]; do
                 sleep 1
             done
         done
